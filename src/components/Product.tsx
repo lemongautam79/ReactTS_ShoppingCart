@@ -15,11 +15,18 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): Rea
     console.log(img)
 
     const onAddToCart = () => dispatch({ type: REDUCER_ACTIONS.ADD, payload: { ...product, qty: 1 } })
-    const itemInCart = inCart ? '-> Item in Cart:"heavy_check_mark"' : null
+    const itemInCart = inCart ? '-> Item in Cart:✔️' : null
 
-    return (
-        <div>Product</div>
-    )
+    const content =
+        <article className="product">
+            <h3>{product.name}</h3>
+            <img src={img} alt={product.name} className="product__img" />
+            <p>{new Intl.NumberFormat('en-US', { style: 'currency', currency: "USD" }).format(product.price)}
+                {itemInCart}
+                <button onClick={onAddToCart}>Add To Cart</button>
+            </p>
+        </article>
+    return content
 }
 
 export default Product
